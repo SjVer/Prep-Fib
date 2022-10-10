@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"*.tmPreferences": "xml",
-		"*.sublime-syntax": "yaml",
-		"*.sublime-build": "jsonc",
-		"*.sublime-completions": "jsonc",
-		"helper_sub_n.h": "c"
-	}
-}
