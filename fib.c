@@ -1,6 +1,6 @@
-// #include "stdio.h"
+#include "stdio.h"
 
-#define N 2
+#define N 15
 #include "fib.h"
 
 int main() {

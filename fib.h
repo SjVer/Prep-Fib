@@ -1,60 +1,43 @@
-#define STR_HELPER(x) #x
-#define STR(x) STR_HELPER(x)
-#define INC STR(__INCLUDE_LEVEL__)
-
 #ifndef N
 #	error "N not defined"
+#	define R (-1)
+#elif N < 0 || N > 19
+#	error "N not in range 0-19"
+#	define R (-1)
 #else
 
-// #pragma message INC "-N: " STR(N)
-
-#	if N == 0
+#	if N == 1
 #		define R 0
-#	elif N == 1
+#	elif N == 2
 #		define R 1
 #	else
 
-//		r1 = fib(n - 1)
-#		pragma region
-//			n = n - 1
-#			include "helper_sub_n.h"
+#		ifndef I	
+#			define I 2
+#			define T1 0	
+#			define T2 1
+#		endif
 
-//			store n
-#			pragma message " STORING N @" INC " -> " STR(N)
-#			include "helper_store_n.h"
+#		if I == N
+#			define TO_R
+#			include "helper_add_ts.h"
 
-//			r = fib(n)
-#			pragma message INC "-NA: " STR(N)
-// #			include "fib.h"
+#			undef I
+#			undef T1
+#			undef T2
+#			undef TT
+#		else
+#			define TO_TT
+#			include "helper_add_ts.h"
 
-//			r1 = r
-#			define DEST 1
-#			include "helper_store_r.h"
-#		pragma endregion
+#			define T2_TO_T1
+#			include "helper_copy.h"
+#			define TT_TO_T2
+#			include "helper_copy.h"
 
-//		n = load n
-#		define LOAD
-#		include "helper_store_n.h"
-#		pragma message " LOADING N @" INC " -> " STR(N)
+#			include "helper_incr_i.h"
+#			include "fib.h"
 
-//		r2 = fib(n - 2)
-#		pragma region
-//			n = n - 1
-#			include "helper_sub_n.h"
-
-//			r = fib(n)
-// #			pragma message INC "-NB: " STR(N)
-// #			include "fib.h"
-
-//			r2 = r
-#			define DEST 2
-#			include "helper_store_r.h"
-#		pragma endregion
-
-//		r = r1 + r2
-#		include "helper_add_rs.h"
+#		endif
 #	endif
-
-// #pragma message INC "-R: " STR(R)
-
 #endif
